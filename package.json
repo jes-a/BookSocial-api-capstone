@@ -1,0 +1,23 @@
+{
+  "name": "booksocial",
+  "version": "1.0.0",
+  "description": "This app allows users to search for literary events in their area using various event APIs",
+  "main": "main.js",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jes-a/BookSocial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jes-a/BookSocial/issues"
+  },
+  "homepage": "https://github.com/jes-a/BookSocial#readme"
+}
