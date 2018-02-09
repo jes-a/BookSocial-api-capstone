@@ -1,4 +1,5 @@
-const EVENTBRITE_SEARCH_URL = "https://www.eventbrite.com/developer/v3/endpoints/events/"
+const KEY = 'DII5KMLS3IPVOZBIEG4M'
+const EVENTBRITE_SEARCH_URL = 'https://www.eventbrite.com/developer/v3/endpoints/events/'
 
 function getDataFromGoodReads(searchTerm, callback) {
 	const settings = {
@@ -7,11 +8,14 @@ function getDataFromGoodReads(searchTerm, callback) {
 		'q': 'book',
 		'location.within': '30mi',
 		'location.address': `${searchTerm}`,
+		'token': `${KEY}`
 		},
 		dataType: 'json',
 		type: 'GET',
-		headers: {'Authorization': 'Bearer LNH55YJCVKVQC6U2VZ'},
-		verify: 'True',
+		headers: {
+//			'Authorization': 'Bearer DII5KMLS3IPVOZBIEG4M',
+			'Access-Control-Allow-Origin': '*'
+		},
 		success: callback, 
 		error: function() {
 			console.log('Eventbrite ajax call error!');
