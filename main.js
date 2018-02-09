@@ -1,7 +1,7 @@
 const KEY = 'DII5KMLS3IPVOZBIEG4M'
 const EVENTBRITE_SEARCH_URL = 'https://www.eventbrite.com/developer/v3/endpoints/events/'
 
-function getDataFromGoodReads(searchTerm, callback) {
+function getDataFromEventbrite(searchTerm, callback) {
 	const settings = {
 		url: EVENTBRITE_SEARCH_URL,
 		data: {
@@ -13,7 +13,6 @@ function getDataFromGoodReads(searchTerm, callback) {
 		dataType: 'json',
 		type: 'GET',
 		headers: {
-//			'Authorization': 'Bearer DII5KMLS3IPVOZBIEG4M',
 			'Access-Control-Allow-Origin': '*'
 		},
 		success: callback, 
@@ -43,7 +42,7 @@ function handleSubmit() {
 		console.log("button clicked");
 		const query = $('#js-query').val();
 		console.log(query);
-		getDataFromGoodReads(query, displayEventbriteData);
+		getDataFromEventbrite(query, displayEventbriteData);
 	});
 }
 
