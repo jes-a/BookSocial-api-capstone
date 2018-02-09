@@ -1,34 +1,45 @@
-const GOODREADS_SEARCH_URL = "https://www.goodreads.com/event/index.xml";
+const EVENTBRITE_SEARCH_URL = "https://www.eventbrite.com/developer/v3/endpoints/events/"
 
 function getDataFromGoodReads(searchTerm, callback) {
-	const query = {
-		'key': 'D18iDrc0VZMILzdwA1A6qQ',
-		'search[postal_code]': `${searchTerm}`
-	}
-	$.getJSON(GOODREADS_SEARCH_URL, query, callback);
-}
+	const settings = {
+		url: EVENTBRITE_SEARCH_URL,
+		data: {
+		'q': 'book',
+		'location.within': '30mi',
+		'location.address': `${searchTerm}`,
+		},
+		dataType: 'json',
+		type: 'GET',
+		headers: {'Authorization': 'Bearer LNH55YJCVKVQC6U2VZ'},
+		verify: 'True',
+		success: callback, 
+		error: function() {
+			console.log('Eventbrite ajax call error!');
+		}
+		};
+		$.ajax(settings);
+	}	
 
-function displayGoodReadsData(data) {
+function displayEventbriteData(data) {
 	const results = data.events.forEach((event, index) => {
 		let result = renderResult(event);
 		$('.js-results').append(event);
 	});
 }
 
-function renderGoodReadsResults(result) {
-	return `<div class="goodreads-search-result">
-			<h2><a href="${result.link}">${result.title}</a></h2>
+function renderEventbriteResults(result) {
+	return `<div class="eventbrite-search-result">
+			<h2><a href="${result.url}">${result.name}</a></h2>
 			</div>`;
 }
 
 function handleSubmit() {
-	$('#search-button').submit(event => {
-		debugger;
+	$('#search-button').click(event => {
 		event.preventDefault();
 		console.log("button clicked");
-		const queryTarget = $(event.currentTarget).find('#js-query');
-		const query = queryTarget.val();
-		getDataFromGoodReads(query, displayGoodReadsData);
+		const query = $('#js-query').val();
+		console.log(query);
+		getDataFromGoodReads(query, displayEventbriteData);
 	});
 }
 
