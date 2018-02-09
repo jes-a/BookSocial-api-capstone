@@ -1,19 +1,24 @@
 (function() {
-const MEETUP_ZIP_URL = "https://api.meetup.com/find/upcoming_events",
-			MEETUP_EVENTS_URL = "https://api.meetup.com/find/locations";
+const MEETUP_ZIP_URL = "https://api.meetup.com/find/locations",
+//			MEETUP_EVENTS_URL = "https://api.meetup.com/find/upcoming_events";
 
 function getZipFromMeetup(searchTerm, callback) {
 	const query = {
 		'query': `${searchTerm}`
 	}
 }
-$.getJSON(MEETUP_ZIP_URL, query, callback)
+$.ajax({
+	url: MEETUP_ZIP_URL,
+	type: 'GET',
+	dataType: 'json',
+
+});
 
 function displayZipFromMeetup(data) {
-	const zipResults = data.
+	const zipResults = data.forEach()
 }
 
-function(searchTerm, callback) {
+function getDataFromMeetup(searchTerm, callback) {
 	const query = {
 		'sign': 'true',
 		'key': '4d1a122f587f52504f6b23424f3e4d48',
