@@ -61,12 +61,22 @@ function renderMeetupResults(meetupResult) {
 	let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
 	let date2 = `${meetupResult.time}`;
 	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
-	return `<div class="meetup-search-result">
-			<h2><a href="${meetupResult.link}">${meetupResult.name}</a></h2>
-			<h4>Meetup Group: ${meetupResult.group.name}</h4>
-			<h4>Type: Meetup event</h4>
-			<h4>Date: ${dateFormatted}</h4>
-			</div>`;
+	let date2Formatted = moment(date2,  'MMM DD YYYY, h:mm a');
+	if (date !== 'undefinedTundefined') {
+		return `<div class="meetup-search-result">
+				<h2><a href="${meetupResult.link}">${meetupResult.name}</a></h2>
+				<h4>Meetup Group: ${meetupResult.group.name}</h4>
+				<h4>Date: ${dateFormatted} </h4>
+				</div>`;
+	} else {
+		return `<div class="meetup-search-result">
+				<h2><a href="${meetupResult.link}">${meetupResult.name}</a></h2>
+				<h4>Meetup Group: ${meetupResult.group.name}</h4>
+				<h4>Type: Meetup event</h4>
+				<h4>Date: ${date2Formatted} </h4>
+				</div>`;
+	}
+
 }
 
 function getDataFromEventbrite(searchTerm, callback) {
@@ -100,7 +110,6 @@ function renderEventbriteResults(result) {
 			<h2><a href="${result.url}">${result.name.text}</a></h2>
 			<h4>Type: Eventbrite event</h4>
 			<h4>Date: ${dateFormatted}</h4>
-			<p>${result.description.text}</p>
 			</div>`;
 }
 
