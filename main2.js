@@ -1,7 +1,6 @@
 const MEETUP_ZIP_URL = "https://api.meetup.com/find/locations/";
 const MEETUP_EVENTS_URL = "https://api.meetup.com/find/upcoming_events/";
 let meetupData = []; 
-const EVENTBRITE_KEY = 'DII5KMLS3IPVOZBIEG4M';
 const EVENTBRITE_SEARCH_URL = 'https://www.eventbriteapi.com/v3/events/search/';
 
 function getZipFromMeetup(searchTerm, callback) {
@@ -32,6 +31,10 @@ function displayZipFromMeetup(data) {
 
 function handleMeetupData(meetupData) {
 	meetupData = meetupData;
+	const meetupResults = meetupData.events.forEach((event, index) => {
+		let meetupResult = renderMeetupResults(event);
+		$('.js-results').append(meetupResult);
+	});
 }
 
 function getDataFromMeetup(lat, lon, callback) {
@@ -54,18 +57,48 @@ function getDataFromMeetup(lat, lon, callback) {
 	$.ajax(settings);
 }	
 
-function displayMeetupResults(meetupData) {
-	const meetupResults = meetupData.events.forEach((event, index) => {
-		let meetupResult = renderMeetupResults(event);
-		$('.js-results').append(meetupResult);
+function renderMeetupResults(meetupResult) {
+	return `<div class="meetup-search-result">
+			<h2><a href="${meetupResult.link}">${meetupResult.name}</a></h2>
+			<h4>Type: Meetup event</h4>
+			<h4>Date: ${meetupResult.local_date}  Time: ${meetupResult.local_time}</h4>
+			<p>${meetupResult.description}</p>
+			</div>`;
+}
+
+function getDataFromEventbrite(searchTerm, callback) {
+	const settings = {
+		url: EVENTBRITE_SEARCH_URL,
+		data: {
+		'q': 'book',
+		'location.within': '30mi',
+		'location.address': `${searchTerm}`,
+		'token': 'DII5KMLS3IPVOZBIEG4M'
+		},
+		dataType: 'json',
+		type: 'GET',
+		crossdomain: true,
+		success: callback, 
+		error: function() {
+			console.log('Eventbrite ajax call error!');
+		}
+		};
+	$.ajax(settings);
+}	
+
+function displayEventbriteData(data) {
+	const results = data.events.forEach((event, index) => {
+		let result = renderEventbriteResults(event);
+		$('.js-results').append(result);
 	});
 }
 
-function renderMeetupResults(meetupResult) {
-	return `<div class="meetup-search-result">
-			<h2><a href="${result.link}">${result.name}</a></h2>
-			<h4>Date: ${result.local_date}  Time: ${result.local_time}</h4>
-			<p>${result.description}</p>
+function renderEventbriteResults(result) {
+	return `<div class="eventbrite-search-result">
+			<h4>Type: Eventbrite event</h4>
+			<h2><a href="${result.url}">${result.name.text}</a></h2>
+			<h4>Date: ${result.start.local}  Time: ${result.start.local}</h4>
+			<p>${result.description.text}</p>
 			</div>`;
 }
 
@@ -81,10 +114,9 @@ function handleSubmit() {
 			$('.js-results').html("<h2>Please enter a zip code to search for events</h2>");
 		} else {
 		getZipFromMeetup(query, displayZipFromMeetup);
-		getDataFromMeetup(lat, lon, displayMeetupResults);
+		getDataFromEventbrite(query, displayEventbriteData);
 		}		
 	});
 }
 
 $(handleSubmit)
-$(handleMeetupData)
