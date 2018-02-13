@@ -45,24 +45,27 @@ function getDataFromMeetup(lat, lon, callback) {
 			'key': '633a3040393169431e6f4b6953b4f4a',
 			'text': 'book',
 			'lat': `${lat}`,
-			'lon': `${lon}`
+			'lon': `${lon}`,
+			'page': '10',		
+			'radius': '30.0'
 		},
 		dataType: 'json',
 		type: 'GET',
+		crossDomain: true,
 		success: callback,
-		error: function() {
-			console.log('Meetup Zip call error')
-		}
 		};
 	$.ajax(settings);
 }	
 
 function renderMeetupResults(meetupResult) {
+	let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
+	let date2 = `${meetupResult.time}`;
+	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
 	return `<div class="meetup-search-result">
 			<h2><a href="${meetupResult.link}">${meetupResult.name}</a></h2>
+			<h4>Meetup Group: ${meetupResult.group.name}</h4>
 			<h4>Type: Meetup event</h4>
-			<h4>Date: ${meetupResult.local_date}  Time: ${meetupResult.local_time}</h4>
-			<p>${meetupResult.description}</p>
+			<h4>Date: ${dateFormatted}</h4>
 			</div>`;
 }
 
@@ -77,11 +80,8 @@ function getDataFromEventbrite(searchTerm, callback) {
 		},
 		dataType: 'json',
 		type: 'GET',
-		crossdomain: true,
+		crossDomain: true,
 		success: callback, 
-		error: function() {
-			console.log('Eventbrite ajax call error!');
-		}
 		};
 	$.ajax(settings);
 }	
@@ -94,10 +94,12 @@ function displayEventbriteData(data) {
 }
 
 function renderEventbriteResults(result) {
+	let date = `${result.start.local}`;
+	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
 	return `<div class="eventbrite-search-result">
-			<h4>Type: Eventbrite event</h4>
 			<h2><a href="${result.url}">${result.name.text}</a></h2>
-			<h4>Date: ${result.start.local}  Time: ${result.start.local}</h4>
+			<h4>Type: Eventbrite event</h4>
+			<h4>Date: ${dateFormatted}</h4>
 			<p>${result.description.text}</p>
 			</div>`;
 }
@@ -106,7 +108,6 @@ function renderEventbriteResults(result) {
 function handleSubmit() {
 	$('#search-button').click(event => {
 		event.preventDefault();
-		console.log('button was clicked');
 		const queryTarget = $('#js-query');
 		const query = queryTarget.val();
 		queryTarget.val('');
