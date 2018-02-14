@@ -9,16 +9,22 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="normalize.css">
  	<link rel="stylesheet" type="text/css" href="main.css">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Patua+One|Roboto:100,300,400" rel="stylesheet"> 
 </head>
 
 <body>
+	<header role="header">
+		<h1>BookSocial</h1>
+		<h2>Meet Fellow Book Lovers Near You</h2>
+	</header>
 	<main role="main">
-		<section class="js-zipcode-search">
-			<h1>Find literary events happening in your area</h1>
+		<section id="js-zipcode-search">
 			<form role="form">
-				<input type="text" name="search" aria-label="Enter zip code" id="js-query" class="search-box" placeholder="Enter zip code">
-				<button type="submit" role="button" id="search-button">Find Events</button>
+				<label id="search-label" for="js-query">Find literary events happening in your area</label>
+				<div class="search-section">
+					<input type="text" name="search" aria-label="Enter zip code" id="js-query" class="search-box" placeholder="Enter zip code">
+					<button type="submit" role="button" id="search-button">Find Events</button>
+				</div>
 			</form>		
 		</section>
 
@@ -29,7 +35,7 @@
 	</main>
 
 <!-- JavaScript -->
-<script src="main2.js"></script>
+<script src="main.js"></script>
 </body>
 
 </html>

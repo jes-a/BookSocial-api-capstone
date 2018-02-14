@@ -1,5 +1,83 @@
-const KEY = 'DII5KMLS3IPVOZBIEG4M';
+const MEETUP_ZIP_URL = "https://api.meetup.com/find/locations/";
+const MEETUP_EVENTS_URL = "https://api.meetup.com/find/upcoming_events/";
+let meetupData = []; 
 const EVENTBRITE_SEARCH_URL = 'https://www.eventbriteapi.com/v3/events/search/';
+
+function getZipFromMeetup(searchTerm, callback) {
+	const settings = {
+		url: MEETUP_ZIP_URL,
+		data: {
+			'key': '633a3040393169431e6f4b6953b4f4a',
+			'query': `${searchTerm}`
+		},
+		dataType: 'json',
+		type: 'GET',
+		crossDomain: true,
+		success: callback,
+		error: function() {
+			console.log('Meetup Zip call error');
+		}
+		};
+	$.ajax(settings);
+}	
+
+
+function displayZipFromMeetup(data) {
+	const results = data[0];
+	getDataFromMeetup(results.lat, results.lon, function(meetupData) {
+		handleMeetupData(meetupData);
+	});
+}
+
+function handleMeetupData(meetupData) {
+	meetupData = meetupData;
+	const meetupResults = meetupData.events.forEach((event, index) => {
+		let meetupResult = renderMeetupResults(event);
+		$('.js-results').append(meetupResult);
+	});
+}
+
+function getDataFromMeetup(lat, lon, callback) {
+	const settings = {
+		url: MEETUP_EVENTS_URL,
+		data: {
+			'sign': 'true',
+			'key': '633a3040393169431e6f4b6953b4f4a',
+			'text': 'book',
+			'lat': `${lat}`,
+			'lon': `${lon}`,
+			'page': '10',		
+			'radius': '30.0'
+		},
+		dataType: 'json',
+		type: 'GET',
+		crossDomain: true,
+		success: callback,
+		};
+	$.ajax(settings);
+}	
+
+function renderMeetupResults(meetupResult) {
+	let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
+	let date2 = `${meetupResult.time}`;
+	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
+	let date2Formatted = moment.unix(date2/1000).format('MMM DD YYYY, h:mm a');
+	if (date !== 'undefinedTundefined') {
+		return `<div class="meetup-search-result">
+				<h3><a class="meetup-h3" href="${meetupResult.link}">${meetupResult.name}</a></h3>
+				<h4>Meetup Group: ${meetupResult.group.name}</h4>
+				<h4>Date: ${dateFormatted} </h4>
+				</div>`;
+	} else {
+		return `<div class="meetup-search-result">
+				<h3><a class="meetup-h3" href="${meetupResult.link}">${meetupResult.name}</a></h3>
+				<h4>Meetup Group: ${meetupResult.group.name}</h4>
+				<h4>Type: Meetup event</h4>
+				<h4>Date: ${date2Formatted} </h4>
+				</div>`;
+	}
+
+}
 
 function getDataFromEventbrite(searchTerm, callback) {
 	const settings = {
@@ -12,11 +90,8 @@ function getDataFromEventbrite(searchTerm, callback) {
 		},
 		dataType: 'json',
 		type: 'GET',
-		crossdomain: true,
+		crossDomain: true,
 		success: callback, 
-		error: function() {
-			console.log('Eventbrite ajax call error!');
-		}
 		};
 	$.ajax(settings);
 }	
@@ -29,26 +104,29 @@ function displayEventbriteData(data) {
 }
 
 function renderEventbriteResults(result) {
+	let date = `${result.start.local}`;
+	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
 	return `<div class="eventbrite-search-result">
-			<h2><a href="${result.url}">${result.name.text}</a></h2>
-			<h4>Date: ${result.start.local}  Time: ${result.start.local}</h4>
-			<p>${result.description.text}</p>
+			<h3><a class="eventbrite-h3" href="${result.url}">${result.name.text}</a></h3>
+			<h4>Type: Eventbrite event</h4>
+			<h4>Date: ${dateFormatted}</h4>
 			</div>`;
 }
+
 
 function handleSubmit() {
 	$('#search-button').click(event => {
 		event.preventDefault();
-		console.log("button clicked");
 		const queryTarget = $('#js-query');
 		const query = queryTarget.val();
 		queryTarget.val('');
 		if (query == '') {
 			$('.js-results').html("<h2>Please enter a zip code to search for events</h2>");
 		} else {
+		getZipFromMeetup(query, displayZipFromMeetup);
 		getDataFromEventbrite(query, displayEventbriteData);
-		}
+		}		
 	});
 }
 
-$(handleSubmit);
+$(handleSubmit)

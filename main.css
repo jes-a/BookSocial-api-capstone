@@ -3,8 +3,98 @@
 }
 
 body {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	margin-left:  30px;
+	max-width: 1000px;
 }
 
-.meetup-search-result {}
+h1, h2 {
+	font-family: 'Patua One', cursive;
+	text-align: center;
+	
+}
+
+h1 {
+	font-size:  35px;
+	margin-bottom: 15px;
+	color: #136f63;
+}
+
+h2 {
+	font-size: 28px;
+	color: #424b54;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top:  1px solid #136f63;
+	border-bottom:  1px solid #136f63;
+	display: block;
+	width: 165px;
+	margin:  0 auto	;
+}
+
+h3 {
+	font-size: 20px;
+	color: #000f08;
+}
+
+a {
+	text-decoration: none;
+	color: #000f08;
+}
+
+a:visited {
+	color: #424b54;
+}
+
+.meetup-h3:hover {
+	color: #ed1c40;
+}
+
+.eventbrite-h3:hover {
+	color:  #f66824;
+}
+
+h4 {
+	font-size: 15px;
+	color: #424b54;
+}
+
+#search-label {
+	display: block;
+	font-family: 'Roboto', sans-serif;
+	font-size:  16px;
+	color: #424b54;
+	margin-top: 40px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.search-box {
+	width: 191px;
+	padding:  5px 10px;
+	border: 1px solid #136f63;
+	outline:  0;
+	font-size:  16px;
+	font-weight: lighter;
+}
+
+.search-section {
+	text-align: center;
+}
+
+#search-button {
+	width:  110px;
+	height:  30px;
+	margin-top:  1px;
+	margin-left: -4px;
+	font-size: 14px;
+	background: #136f63;
+	border: 1px solid #136f63;
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-weight: bold;
+}
+
+.meetup-search-result {
+
+}
