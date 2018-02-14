@@ -4,97 +4,195 @@
 
 body {
 	font-family: 'Roboto', sans-serif;
-	margin-left:  30px;
-	max-width: 1000px;
+	margin: 0 auto;
+	max-width: 800px;
 }
 
 h1, h2 {
 	font-family: 'Patua One', cursive;
-	text-align: center;
-	
 }
 
 h1 {
-	font-size:  35px;
-	margin-bottom: 15px;
-	color: #136f63;
+	font-size:  45px;
+	margin-bottom: 0;
+	color: #1b998b;
+	text-align: center;
+}
+
+h2.subhead {
+	font-size: 28px;
+	color: #6c6c6d;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top:  1px solid #1b998b;
+	border-bottom:  1px solid #1b998b;
+	display: block;
+	width: 175px;
+	margin: 15px auto 0 auto;
+	text-align: center;	
 }
 
 h2 {
-	font-size: 28px;
-	color: #424b54;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border-top:  1px solid #136f63;
-	border-bottom:  1px solid #136f63;
-	display: block;
-	width: 165px;
-	margin:  0 auto	;
+	font-size: 32px;
+	color: #6c6c6d;
+	margin: 0;
 }
 
 h3 {
-	font-size: 20px;
-	color: #000f08;
+	font-size: 22px;
+	font-weight: 400;
+	color: #0d1014;
+	margin: 10px 0;
+}
+
+h4 {
+	font-size: 18px;
+	font-weight: 400;
+	color: #6c6c6d;
+	margin: 5px 0;
+}
+
+h5 {
+	font-size: 16px;
+	font-weight: 300;
+	color: #6c6c6d;
+	margin: 5px 0;
+}
+
+.error {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	color: #ff0000;
+	border: none;
+	width: auto;
+	font-size: 25px;
+	text-align: center;
 }
 
 a {
 	text-decoration: none;
-	color: #000f08;
+	color: #0d1014;
 }
 
-a:visited {
-	color: #424b54;
+:visited {
+	color: #305a64;
+}
+
+:focus {
+	outline-color: #1b998b;
 }
 
 .meetup-h3:hover {
 	color: #ed1c40;
 }
 
+.meetup-h3:focus {
+	outline-color: #ed1c40;
+}
+
 .eventbrite-h3:hover {
 	color:  #f66824;
 }
 
-h4 {
-	font-size: 15px;
-	color: #424b54;
+.eventbrite-h3:focus {
+	outline-color:  #f66824;
+}
+
+.search-section {
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 50px;
 }
 
 #search-label {
 	display: block;
 	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
 	font-size:  16px;
-	color: #424b54;
-	margin-top: 40px;
+	color: #6c6c6d;
 	margin-bottom: 10px;
 	text-align: center;
 }
 
 .search-box {
 	width: 191px;
-	padding:  5px 10px;
-	border: 1px solid #136f63;
-	outline:  0;
+	height: 35px;
+	padding: 5px 10px;
+	border: 1px solid #1b998b;
 	font-size:  16px;
-	font-weight: lighter;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
 }
 
-.search-section {
-	text-align: center;
+::placeholder {
+  font-weight: 300;
 }
 
 #search-button {
 	width:  110px;
-	height:  30px;
-	margin-top:  1px;
+	height:  35px;
 	margin-left: -4px;
 	font-size: 14px;
-	background: #136f63;
-	border: 1px solid #136f63;
+	background: #1b998b;
+	border: 1px solid #1b998b;
 	color: #fff;
 	font-family: 'Roboto', sans-serif;
 	font-weight: bold;
 }
 
-.meetup-search-result {
-
+.results-header {
+	display: none;
+	margin-bottom: 20px;
 }
+
+#key-text {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	font-size:  15px;
+	color: #6c6c6d;
+	margin: 5px -5px;
+}
+
+#key {
+	height: 20px;
+	margin-bottom: -5px;
+}
+
+#key2 {
+	height: 20px;
+	margin-bottom: -5px;
+	padding-left: 15px;	
+}
+
+.search-results {
+	margin: 0 auto;
+	max-width: 800px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+.search-result {
+	border-top: 1px solid #6c6c6d;
+	padding-top: 10px;
+	margin-bottom: 35px;
+}
+
+.type-logo {
+	display: inline-block;
+	float: right;
+	padding-top: 5px;
+	font-size: 0;
+	height: 45px;
+}
+
+#truncated-desc {
+	display: block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 700px;
+}
+
+
+
+

@@ -43,11 +43,13 @@ function getDataFromMeetup(lat, lon, callback) {
 		data: {
 			'sign': 'true',
 			'key': '633a3040393169431e6f4b6953b4f4a',
-			'text': 'book',
 			'lat': `${lat}`,
 			'lon': `${lon}`,
-			'page': '10',		
-			'radius': '30.0'
+			'order': 'time',
+			'page': '20',		
+			'radius': '30.0',
+			'text': 'book',
+			'topic_category': '222'
 		},
 		dataType: 'json',
 		type: 'GET',
@@ -63,17 +65,20 @@ function renderMeetupResults(meetupResult) {
 	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
 	let date2Formatted = moment.unix(date2/1000).format('MMM DD YYYY, h:mm a');
 	if (date !== 'undefinedTundefined') {
-		return `<div class="meetup-search-result">
-				<h3><a class="meetup-h3" href="${meetupResult.link}">${meetupResult.name}</a></h3>
-				<h4>Meetup Group: ${meetupResult.group.name}</h4>
+		return `<div class="search-result">
+				<img class="type-logo" src="../images/meetup-logo.png" alt="meetup logo">
+				<h3><a class="meetup-h3" href="${meetupResult.link}" target="_blank">${meetupResult.name}</a></h3>
 				<h4>Date: ${dateFormatted} </h4>
+				<h5>Meetup Group: ${meetupResult.group.name}</h5>
+				<h5>Meetup Type: ${meetupResult.group.join_mode}</h5>
 				</div>`;
 	} else {
-		return `<div class="meetup-search-result">
-				<h3><a class="meetup-h3" href="${meetupResult.link}">${meetupResult.name}</a></h3>
-				<h4>Meetup Group: ${meetupResult.group.name}</h4>
-				<h4>Type: Meetup event</h4>
+		return `<div class="search-result">
+				<img class="type-logo" src="../images/meetup-logo.png" alt="meetup logo">
+				<h3><a class="meetup-h3" href="${meetupResult.link}" target="_blank">${meetupResult.name}</a></h3>
 				<h4>Date: ${date2Formatted} </h4>
+				<h5>Meetup Group: ${meetupResult.group.name}</h5>
+				<h5>Meetup Type: ${meetupResult.group.join_mode}</h5>
 				</div>`;
 	}
 
@@ -86,7 +91,8 @@ function getDataFromEventbrite(searchTerm, callback) {
 		'q': 'book',
 		'location.within': '30mi',
 		'location.address': `${searchTerm}`,
-		'token': 'DII5KMLS3IPVOZBIEG4M'
+		'token': 'DII5KMLS3IPVOZBIEG4M',
+		'sort_by': 'date'
 		},
 		dataType: 'json',
 		type: 'GET',
@@ -106,10 +112,11 @@ function displayEventbriteData(data) {
 function renderEventbriteResults(result) {
 	let date = `${result.start.local}`;
 	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
-	return `<div class="eventbrite-search-result">
-			<h3><a class="eventbrite-h3" href="${result.url}">${result.name.text}</a></h3>
-			<h4>Type: Eventbrite event</h4>
+	return `<div class="search-result">
+			<img class="type-logo" src="../images/eventbrite-orange.png" alt="eventbrite logo">
+			<h3><a class="eventbrite-h3" href="${result.url}" target="_blank">${result.name.text}</a></h3>
 			<h4>Date: ${dateFormatted}</h4>
+			<h5 id="truncated-desc">${result.description.text}</h5>
 			</div>`;
 }
 
@@ -121,10 +128,13 @@ function handleSubmit() {
 		const query = queryTarget.val();
 		queryTarget.val('');
 		if (query == '') {
-			$('.js-results').html("<h2>Please enter a zip code to search for events</h2>");
+			$('.js-error').html('<p class="error">Please enter a zip code to search for events</p>');
 		} else {
-		getZipFromMeetup(query, displayZipFromMeetup);
-		getDataFromEventbrite(query, displayEventbriteData);
+			$('.js-error').hide();
+			$('.js-subhead').hide();
+			$('.results-header').show();
+			getZipFromMeetup(query, displayZipFromMeetup);
+			getDataFromEventbrite(query, displayEventbriteData);
 		}		
 	});
 }

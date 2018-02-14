@@ -15,21 +15,25 @@
 <body>
 	<header role="header">
 		<h1>BookSocial</h1>
-		<h2>Meet Fellow Book Lovers Near You</h2>
+		<h2 class="js-subhead subhead">Find Events With Fellow Book Lovers Near You</h2>
 	</header>
 	<main role="main">
 		<section id="js-zipcode-search">
 			<form role="form">
-				<label id="search-label" for="js-query">Find literary events happening in your area</label>
 				<div class="search-section">
 					<input type="text" name="search" aria-label="Enter zip code" id="js-query" class="search-box" placeholder="Enter zip code">
 					<button type="submit" role="button" id="search-button">Find Events</button>
 				</div>
+				<div class="js-error"></div>
 			</form>		
 		</section>
 
-		<section class="js-results">
-			
+		<section class="js-results search-results">
+			<div class="results-header" aria-label="Search results">
+				<h2>Search Results</h2>
+				<p id="key-text"><img id="key" src="../images/eventbrite-orange.png" alt="Eventbrite logo">= Eventbrite Event<img id="key2" src="../images/meetup-logo.png" alt="Meetup logo"> = Meetup Event </p>
+			</div>	
+			<div class="date-header"></div>	
 		</section>
 		
 	</main>
