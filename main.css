@@ -137,9 +137,7 @@ a {
 	font-size: 14px;
 	background: #1b998b;
 	border-color: #1b998b;
-    border-bottom-width: 0px;
-    border-top-width: 2px;
-
+    border-width: 2px 0 0 0;
 	color: #fff;
 	font-family: 'Roboto', sans-serif;
 	font-weight: bold;

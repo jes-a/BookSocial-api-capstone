@@ -61,6 +61,7 @@ function getDataFromMeetup(lat, lon, callback) {
 
 function displayDateHeader() {
 	let todaysDate = moment().format('LL');
+
 	return `<h3>${todaysDate}</h3>`;
 }
 
@@ -71,7 +72,7 @@ function renderMeetupResults(meetupResult) {
 	let date2Formatted = moment.unix(date2/1000).format('MMM DD YYYY, h:mm a');
 	if (date !== 'undefinedTundefined') {
 		return `<div class="search-result">
-				<img class="type-logo" src="../images/meetup-logo.png" alt="meetup logo">
+				<img class="type-logo" src="images/meetup-logo.png" alt="meetup logo">
 				<h3><a class="meetup-h3" href="${meetupResult.link}" target="_blank">${meetupResult.name}</a></h3>
 				<h4>Date: ${dateFormatted} </h4>
 				<h5>Meetup Group: ${meetupResult.group.name}</h5>
@@ -79,7 +80,7 @@ function renderMeetupResults(meetupResult) {
 				</div>`;
 	} else {
 		return `<div class="search-result">
-				<img class="type-logo" src="../images/meetup-logo.png" alt="meetup logo">
+				<img class="type-logo" src="images/meetup-logo.png" alt="meetup logo">
 				<h3><a class="meetup-h3" href="${meetupResult.link}" target="_blank">${meetupResult.name}</a></h3>
 				<h4>Date: ${date2Formatted} </h4>
 				<h5>Meetup Group: ${meetupResult.group.name}</h5>
@@ -118,7 +119,7 @@ function renderEventbriteResults(result) {
 	let date = `${result.start.local}`;
 	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
 	return `<div class="search-result">
-			<img class="type-logo" src="../images/eventbrite-orange.png" alt="eventbrite logo">
+			<img class="type-logo" src="images/eventbrite-orange.png" alt="eventbrite logo">
 			<h3><a class="eventbrite-h3" href="${result.url}" target="_blank">${result.name.text}</a></h3>
 			<h4>Date: ${dateFormatted}</h4>
 			<h5 id="truncated-desc">${result.description.text}</h5>
