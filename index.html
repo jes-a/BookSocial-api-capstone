@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width">
 	<title>BookSocial</title>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment-with-locales.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="normalize.css">
  	<link rel="stylesheet" type="text/css" href="main.css">
 	<link href="https://fonts.googleapis.com/css?family=Patua+One|Roboto:100,300,400" rel="stylesheet"> 
@@ -15,7 +15,9 @@
 <body>
 	<header role="header">
 		<h1>BookSocial</h1>
-		<h2 class="js-subhead subhead">Find Events With Fellow Book Lovers Near You</h2>
+		<div class="js-subhead subhead">
+			<h2>Hang Out With Fellow Bibliophiles At Events Near You</h2>
+		</div>
 	</header>
 	<main role="main">
 		<section id="js-zipcode-search">

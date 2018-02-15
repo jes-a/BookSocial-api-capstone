@@ -19,15 +19,16 @@ h1 {
 	text-align: center;
 }
 
-h2.subhead {
-	font-size: 28px;
-	color: #6c6c6d;
-	padding-top: 10px;
-	padding-bottom: 10px;
+.subhead h2 {
+	font-size: 26px;
+	padding: 10px;
+
+}
+
+.subhead {
 	border-top:  1px solid #1b998b;
 	border-bottom:  1px solid #1b998b;
-	display: block;
-	width: 175px;
+	width: 300px;
 	margin: 15px auto 0 auto;
 	text-align: center;	
 }
@@ -36,6 +37,7 @@ h2 {
 	font-size: 32px;
 	color: #6c6c6d;
 	margin: 0;
+	text-transform: uppercase;
 }
 
 h3 {
@@ -134,7 +136,10 @@ a {
 	margin-left: -4px;
 	font-size: 14px;
 	background: #1b998b;
-	border: 1px solid #1b998b;
+	border-color: #1b998b;
+    border-bottom-width: 0px;
+    border-top-width: 2px;
+
 	color: #fff;
 	font-family: 'Roboto', sans-serif;
 	font-weight: bold;

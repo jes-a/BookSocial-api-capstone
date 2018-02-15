@@ -59,6 +59,11 @@ function getDataFromMeetup(lat, lon, callback) {
 	$.ajax(settings);
 }	
 
+function displayDateHeader() {
+	let todaysDate = moment().format('LL');
+	return `<h3>${todaysDate}</h3>`;
+}
+
 function renderMeetupResults(meetupResult) {
 	let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
 	let date2 = `${meetupResult.time}`;
@@ -135,6 +140,7 @@ function handleSubmit() {
 			$('.results-header').show();
 			getZipFromMeetup(query, displayZipFromMeetup);
 			getDataFromEventbrite(query, displayEventbriteData);
+			console.log(displayDateHeader());
 		}		
 	});
 }
