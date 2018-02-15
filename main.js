@@ -41,7 +41,6 @@ function getDataFromMeetup(lat, lon, callback) {
 	const settings = {
 		url: MEETUP_EVENTS_URL,
 		data: {
-			'sign': 'true',
 			'key': '633a3040393169431e6f4b6953b4f4a',
 			'lat': `${lat}`,
 			'lon': `${lon}`,
