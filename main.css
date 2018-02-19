@@ -193,9 +193,15 @@ a {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	width: 700px;
+	width: 300px;
 }
 
+
+@media screen and (min-width : 650px) {
+	#truncated-desc {
+		width: 600px;
+	}
+}
 
 
 

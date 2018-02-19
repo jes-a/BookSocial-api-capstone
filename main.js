@@ -1,47 +1,30 @@
-const MEETUP_ZIP_URL = "https://api.meetup.com/find/locations/";
-const MEETUP_EVENTS_URL = "https://api.meetup.com/find/upcoming_events/";
+const MEETUP_ZIP_URL = 'https://api.meetup.com/find/locations?callback=?';
+const MEETUP_EVENTS_URL = 'https://api.meetup.com/find/upcoming_events?callback=?';
+const API_KEY = '633a3040393169431e6f4b6953b4f4a';
 let meetupData = []; 
-const EVENTBRITE_SEARCH_URL = 'https://www.eventbriteapi.com/v3/events/search/';
+const EVENTBRITE_SEARCH_URL = 'https://www.eventbriteapi.com/v3/events/search/'; 
 
 function getZipFromMeetup(searchTerm, callback) {
-	const settings = {
-		url: MEETUP_ZIP_URL,
-		data: {
-			'key': '633a3040393169431e6f4b6953b4f4a',
-			'query': `${searchTerm}`
-		},
-		dataType: 'json',
-		type: 'GET',
-		crossDomain: true,
-		success: callback,
-		error: function() {
-			console.log('Meetup Zip call error');
-		}
-		};
-	$.ajax(settings);
-}	
-
+    const query = {
+        'sign': true,
+        'key': API_KEY,
+    	'query': `${searchTerm}`,
+        }
+    $.getJSON(MEETUP_ZIP_URL, query, callback);
+}    
 
 function displayZipFromMeetup(data) {
-	const results = data[0];
+	const results = data.data[0];
+	console.log(data);
 	getDataFromMeetup(results.lat, results.lon, function(meetupData) {
 		handleMeetupData(meetupData);
 	});
 }
 
-function handleMeetupData(meetupData) {
-	meetupData = meetupData;
-	const meetupResults = meetupData.events.forEach((event, index) => {
-		let meetupResult = renderMeetupResults(event);
-		$('.js-results').append(meetupResult);
-	});
-}
-
 function getDataFromMeetup(lat, lon, callback) {
-	const settings = {
-		url: MEETUP_EVENTS_URL,
-		data: {
-			'key': '633a3040393169431e6f4b6953b4f4a',
+	const query = {
+            'sign': true,
+            'key': API_KEY,
 			'lat': `${lat}`,
 			'lon': `${lon}`,
 			'order': 'time',
@@ -49,20 +32,19 @@ function getDataFromMeetup(lat, lon, callback) {
 			'radius': '30.0',
 			'text': 'book',
 			'topic_category': '222'
-		},
-		dataType: 'json',
-		type: 'GET',
-		crossDomain: true,
-		success: callback,
-		};
-	$.ajax(settings);
+		}
+	$.getJSON(MEETUP_EVENTS_URL, query, callback);
 }	
 
-function displayDateHeader() {
-	let todaysDate = moment().format('LL');
-
-	return `<h3>${todaysDate}</h3>`;
+function handleMeetupData(meetupData) {
+	meetupData = meetupData;
+	console.log(meetupData);
+	const meetupResults = meetupData.data.events.forEach((event, index) => {
+		let meetupResult = renderMeetupResults(event);
+		$('.js-results').append(meetupResult);
+	});
 }
+
 
 function renderMeetupResults(meetupResult) {
 	let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
@@ -90,24 +72,18 @@ function renderMeetupResults(meetupResult) {
 }
 
 function getDataFromEventbrite(searchTerm, callback) {
-	const settings = {
-		url: EVENTBRITE_SEARCH_URL,
-		data: {
+	const query = {
 		'q': 'book',
 		'location.within': '30mi',
 		'location.address': `${searchTerm}`,
 		'token': 'DII5KMLS3IPVOZBIEG4M',
 		'sort_by': 'date'
-		},
-		dataType: 'json',
-		type: 'GET',
-		crossDomain: true,
-		success: callback, 
-		};
-	$.ajax(settings);
+		}
+	$.getJSON(EVENTBRITE_SEARCH_URL, query, callback);
 }	
 
 function displayEventbriteData(data) {
+	console.log(data);
 	const results = data.events.forEach((event, index) => {
 		let result = renderEventbriteResults(event);
 		$('.js-results').append(result);
@@ -140,7 +116,6 @@ function handleSubmit() {
 			$('.results-header').show();
 			getZipFromMeetup(query, displayZipFromMeetup);
 			getDataFromEventbrite(query, displayEventbriteData);
-			console.log(displayDateHeader());
 		}		
 	});
 }
