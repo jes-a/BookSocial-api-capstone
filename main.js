@@ -3,6 +3,8 @@ const MEETUP_EVENTS_URL = 'https://api.meetup.com/find/upcoming_events?callback=
 const API_KEY = '633a3040393169431e6f4b6953b4f4a';
 const EVENTBRITE_SEARCH_URL = 'https://www.eventbriteapi.com/v3/events/search/'; 
 
+// Inputs zip code from search form to get lat and lon coordinates in order to display local events
+
 function getZipFromMeetup(searchTerm, callback) {
     const query = {
         'sign': true,
@@ -18,6 +20,8 @@ function displayZipFromMeetup(data) {
 		handleMeetupData(meetupData);
 	});
 }
+
+// Gets meetup event information from meetup API
 
 function getDataFromMeetup(lat, lon, callback) {
 	const query = {
@@ -41,6 +45,8 @@ function handleMeetupData(meetupData) {
 	});
 }
 
+
+// Format dates correctly from returned JSON data and provides html formatted response
 
 function renderMeetupResults(meetupResult) {
 	let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
@@ -66,6 +72,8 @@ function renderMeetupResults(meetupResult) {
 	}
 
 }
+
+// Gets event data from EventBrite API
 
 function getDataFromEventbrite(searchTerm, callback) {
 	const query = {
