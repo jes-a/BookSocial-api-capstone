@@ -102,15 +102,22 @@ function renderEventbriteResults(result) {
 }
 
 
+function validateZipCode(query) {
+    return (/^\b\d{5}(-\d{4})?\b$/).test(query);
+}
+
 function handleSubmit() {
 	$('#search-button').click(event => {
 		event.preventDefault();
 		const queryTarget = $('#js-query');
 		const query = queryTarget.val();
 		queryTarget.val('');
+		const isValid = validateZipCode(query);
 		if (query == '') {
 			$('.js-error').html('<p class="error">Please enter a zip code to search for events</p>');
-		} else {
+        } else if (isValid != true) {
+            $('.js-error').html('<p class="error">Please enter a valid zip code</p>');
+        } else {
 			$('.js-error').hide();
 			$('.js-subhead').hide();
 			$('.results-header').show();
