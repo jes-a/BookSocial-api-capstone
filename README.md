@@ -14,7 +14,7 @@ This app allows the user to search for literary events in their area by entering
 
 ## To Run App Locally ##
 
-- Clone Git repository
+- Git clone https://github.com/jes-a/BookSocial.git
 - Run npm install to install node-module packages
 - Run http-server on Terminal and app opens on localhost:8080
 
