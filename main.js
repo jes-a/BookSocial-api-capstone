@@ -1,7 +1,6 @@
 const MEETUP_ZIP_URL = 'https://api.meetup.com/find/locations?callback=?';
 const MEETUP_EVENTS_URL = 'https://api.meetup.com/find/upcoming_events?callback=?';
 const API_KEY = '633a3040393169431e6f4b6953b4f4a';
-let meetupData = []; 
 const EVENTBRITE_SEARCH_URL = 'https://www.eventbriteapi.com/v3/events/search/'; 
 
 function getZipFromMeetup(searchTerm, callback) {
@@ -15,7 +14,6 @@ function getZipFromMeetup(searchTerm, callback) {
 
 function displayZipFromMeetup(data) {
 	const results = data.data[0];
-	console.log(data);
 	getDataFromMeetup(results.lat, results.lon, function(meetupData) {
 		handleMeetupData(meetupData);
 	});
@@ -37,8 +35,6 @@ function getDataFromMeetup(lat, lon, callback) {
 }	
 
 function handleMeetupData(meetupData) {
-	meetupData = meetupData;
-	console.log(meetupData);
 	const meetupResults = meetupData.data.events.forEach((event, index) => {
 		let meetupResult = renderMeetupResults(event);
 		$('.js-results').append(meetupResult);
@@ -82,9 +78,8 @@ function getDataFromEventbrite(searchTerm, callback) {
 	$.getJSON(EVENTBRITE_SEARCH_URL, query, callback);
 }	
 
-function displayEventbriteData(data) {
-	console.log(data);
-	const results = data.events.forEach((event, index) => {
+function displayEventbriteData(eventBriteData) {
+	const results = eventBriteData.events.forEach((event, index) => {
 		let result = renderEventbriteResults(event);
 		$('.js-results').append(result);
 	});
