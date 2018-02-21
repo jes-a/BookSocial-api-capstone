@@ -2,9 +2,9 @@ const MEETUP_ZIP_URL = 'https://api.meetup.com/find/locations?callback=?';
 const MEETUP_EVENTS_URL = 'https://api.meetup.com/find/upcoming_events?callback=?';
 const API_KEY = '633a3040393169431e6f4b6953b4f4a';
 const EVENTBRITE_SEARCH_URL = 'https://www.eventbriteapi.com/v3/events/search/'; 
+let hasMeetupData = false;
 
-// Inputs zip code from search form to get lat and lon coordinates in order to display local events
-
+// Input zip code from search form to get lat and lon coordinates in order to display local events
 function getZipFromMeetup(searchTerm, callback) {
     const query = {
         'sign': true,
@@ -15,14 +15,16 @@ function getZipFromMeetup(searchTerm, callback) {
 }    
 
 function displayZipFromMeetup(data) {
-	const results = data.data[0];
+	if (data.data.length > 0) {
+		hasMeetupData = true;
+	} 
+	let results = data.data[0];
 	getDataFromMeetup(results.lat, results.lon, function(meetupData) {
 		handleMeetupData(meetupData);
 	});
 }
 
-// Gets meetup event information from meetup API
-
+// Get meetup event information from meetup API
 function getDataFromMeetup(lat, lon, callback) {
 	const query = {
             'sign': true,
@@ -41,13 +43,12 @@ function getDataFromMeetup(lat, lon, callback) {
 function handleMeetupData(meetupData) {
 	const meetupResults = meetupData.data.events.forEach((event, index) => {
 		let meetupResult = renderMeetupResults(event);
-		$('.js-results').append(meetupResult);
+		$('#js-search-results-section').append(meetupResult);
 	});
 }
 
 
 // Format dates correctly from returned JSON data and provides html formatted response
-
 function renderMeetupResults(meetupResult) {
 	let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
 	let date2 = `${meetupResult.time}`;
@@ -73,8 +74,7 @@ function renderMeetupResults(meetupResult) {
 
 }
 
-// Gets event data from EventBrite API
-
+// Get event data from EventBrite API
 function getDataFromEventbrite(searchTerm, callback) {
 	const query = {
 		'q': 'book',
@@ -89,7 +89,7 @@ function getDataFromEventbrite(searchTerm, callback) {
 function displayEventbriteData(eventBriteData) {
 	const results = eventBriteData.events.forEach((event, index) => {
 		let result = renderEventbriteResults(event);
-		$('.js-results').append(result);
+		$('#js-search-results-section').append(result);
 	});
 }
 
@@ -110,9 +110,9 @@ function validateZipCode(query) {
 }
 
 function handleSubmit() {
-	$('#search-button').click(event => {
+	$('#js-form').submit(event => {
 		event.preventDefault();
-		const queryTarget = $('#js-query');
+		const queryTarget = $('.js-query');
 		const query = queryTarget.val();
 		queryTarget.val('');
 		const isValid = validateZipCode(query);
@@ -120,14 +120,54 @@ function handleSubmit() {
 			$('.js-error').html('<p class="error">Please enter a zip code to search for events</p>');
         } else if (isValid != true) {
             $('.js-error').html('<p class="error">Please enter a valid zip code</p>');
-        } else {
+   //      } else if (hasMeetupData === false) {
+			// $('.js-error').html(`<p class="error">No Search Results for ${query}.</p>`);
+		} else {
 			$('.js-error').hide();
-			$('.js-subhead').hide();
-			$('.results-header').show();
+			$('#js-landing-page').hide();
+			$('#js-search-results-page').show();
+			$('#js-search-results-h2').append(query);
 			getZipFromMeetup(query, displayZipFromMeetup);
 			getDataFromEventbrite(query, displayEventbriteData);
 		}		
 	});
 }
 
+// Handle recurrent user search
+function handleNewSearch() {
+	$('#js-new-search-form').submit(event => {
+		event.preventDefault();
+		const queryTarget = $('.js-query2');
+		const query = queryTarget.val();
+		queryTarget.val('');
+		const isValid = validateZipCode(query);
+		if (query == '') {
+			$('.js-error').show();
+			$('#js-search-results-section').empty();
+			$('#js-search-results-h2').empty();
+			$('#key-text').hide();
+			$('.js-error').html('<p class="error">Please enter a zip code to search for events</p>');
+        } else if (isValid != true) {
+        	$('.js-error').show();
+			$('#js-search-results-section').empty();
+			$('#js-search-results-h2').empty();
+			$('#key-text').hide();
+            $('.js-error').html('<p class="error">Please enter a valid zip code</p>');
+   //      } else if (meetupData.length == 0) {
+			// $('#js-search-results-section').empty();
+			// $('#js-search-results-h2').empty();
+			// $('#key-text').hide();
+			// $('.js-error').html(`<p class="error">No Search Results for ${query}.</p>`);
+        } else { 
+			$('.js-error').hide();
+			$('#js-search-results-section').empty();
+			$('#js-search-results-h2').empty();
+			$('#js-search-results-h2').html(`<h2 class="results-h2">Search Results for ${query}</h2> `);
+			getZipFromMeetup(query, displayZipFromMeetup);
+			getDataFromEventbrite(query, displayEventbriteData);
+        }
+	});
+}
+
 $(handleSubmit)
+$(handleNewSearch)

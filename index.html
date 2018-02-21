@@ -13,32 +13,45 @@
 </head>
 
 <body>
+<!-- Landing Page -->
+
+<main role="main" id="js-landing-page">
 	<header role="header">
 		<h1>BookSocial</h1>
-		<div class="js-subhead subhead">
-			<h2>Hang Out With Fellow Bibliophiles At Events Near You</h2>
-		</div>
+		<h2 class="subhead">Hang Out With Fellow Bibliophiles At Events Near You</h2>
 	</header>
-	<main role="main">
-		<section id="js-zipcode-search">
-			<form role="form">
-				<div class="search-section">
-					<input type="text" name="search" aria-label="Enter zip code" id="js-query" class="search-box" placeholder="Enter zip code">
-					<button type="submit" role="button" id="search-button">Find Events</button>
-				</div>
-				<div class="js-error"></div>
-			</form>		
-		</section>
+	<section>
+		<form role="form" id="js-form">
+			<div class="search-section">
+				<input type="text" name="search" aria-label="Enter zip code" class="js-query search-box" placeholder="Enter zip code">
+				<button type="submit" role="button" class="search-button">Find Events</button>
+			</div>
+			<div class="js-error"></div>
+		</form>		
+	</section>
+</main>
 
-		<section class="js-results search-results">
-			<div class="results-header" aria-label="Search results">
-				<h2>Search Results</h2>
-				<p id="key-text"><img id="key" src="images/meetup-logo.png" alt="Meetup logo">= Meetup Event <img id="key2" src="images/eventbrite-orange.png" alt="Eventbrite logo">= Eventbrite Event </p>
-			</div>	
-			<div class="date-header"></div>	
-		</section>
-		
-	</main>
+<!-- Search Results -->	
+<main role="main" id="js-search-results-page" hidden>	
+	<header role="header" id="search-results-head">
+		<h1 class="header2">BookSocial</h1>
+			<form role="form" id="js-new-search-form">
+				<div class="search-section-top">
+					<input type="text" name="search" aria-label="Enter zip code" class="js-query2 search-box" placeholder="Enter zip code">
+					<button type="submit" role="button" class="search-button">Find Events</button>
+				</div>
+			</form>	
+	</header>
+	<div class="js-error error-div"></div>	
+
+	<section class="search-results-section">
+		<div id="search-results-header" aria-label="Search results">
+			<h2 class="results-h2" id="js-search-results-h2">Search Results for </h2>
+			<p id="key-text"><img id="key" src="images/meetup-logo.png" alt="Meetup logo">= Meetup Event <img id="key2" src="images/eventbrite-orange.png" alt="Eventbrite logo">= Eventbrite Event </p>
+		</div>	
+	</section>
+	<section id="js-search-results-section" class="search-results-section"></section>
+</main>
 
 <!-- JavaScript -->
 <script src="main.js"></script>
