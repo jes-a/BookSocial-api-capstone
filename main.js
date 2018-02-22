@@ -1,8 +1,8 @@
 const MEETUP_ZIP_URL = 'https://api.meetup.com/find/locations?callback=?';
 const MEETUP_EVENTS_URL = 'https://api.meetup.com/find/upcoming_events?callback=?';
 const API_KEY = '633a3040393169431e6f4b6953b4f4a';
-const EVENTBRITE_SEARCH_URL = 'https://www.eventbriteapi.com/v3/events/search/'; 
-let hasMeetupData = false;
+const EVENTBRITE_SEARCH_URL = 'https://www.eventbriteapi.com/v3/events/search/';
+let doesZipExist = false;
 
 // Input zip code from search form to get lat and lon coordinates in order to display local events
 function getZipFromMeetup(searchTerm, callback) {
@@ -15,13 +15,15 @@ function getZipFromMeetup(searchTerm, callback) {
 }    
 
 function displayZipFromMeetup(data) {
-	if (data.data.length > 0) {
-		hasMeetupData = true;
-	} 
-	let results = data.data[0];
-	getDataFromMeetup(results.lat, results.lon, function(meetupData) {
-		handleMeetupData(meetupData);
-	});
+	doesZipExist = (data.data.length > 0) ? true : false;
+	if (doesZipExist) {
+		let results = data.data[0];
+		getDataFromMeetup(results.lat, results.lon, function(meetupData) {
+			handleMeetupData(meetupData);
+		});
+	} else {
+		showBadZipMessage();
+	}
 }
 
 // Get meetup event information from meetup API
@@ -76,14 +78,16 @@ function renderMeetupResults(meetupResult) {
 
 // Get event data from EventBrite API
 function getDataFromEventbrite(searchTerm, callback) {
-	const query = {
-		'q': 'book',
-		'location.within': '30mi',
-		'location.address': `${searchTerm}`,
-		'token': 'DII5KMLS3IPVOZBIEG4M',
-		'sort_by': 'date'
+	if (doesZipExist == false) {
+		const query = {
+			'q': 'book',
+			'location.within': '30mi',
+			'location.address': `${searchTerm}`,
+			'token': 'DII5KMLS3IPVOZBIEG4M',
+			'sort_by': 'date'
 		}
-	$.getJSON(EVENTBRITE_SEARCH_URL, query, callback);
+		$.getJSON(EVENTBRITE_SEARCH_URL, query, callback);
+	}
 }	
 
 function displayEventbriteData(eventBriteData) {
@@ -104,7 +108,6 @@ function renderEventbriteResults(result) {
 			</div>`;
 }
 
-
 function validateZipCode(query) {
     return (/^\b\d{5}(-\d{4})?\b$/).test(query);
 }
@@ -112,16 +115,12 @@ function validateZipCode(query) {
 function handleSubmit() {
 	$('#js-form').submit(event => {
 		event.preventDefault();
-		const queryTarget = $('.js-query');
+		const queryTarget = $(event.currentTarget[0]);
 		const query = queryTarget.val();
 		queryTarget.val('');
 		const isValid = validateZipCode(query);
-		if (query == '') {
-			$('.js-error').html('<p class="error">Please enter a zip code to search for events</p>');
-        } else if (isValid != true) {
-            $('.js-error').html('<p class="error">Please enter a valid zip code</p>');
-   //      } else if (hasMeetupData === false) {
-			// $('.js-error').html(`<p class="error">No Search Results for ${query}.</p>`);
+		if (query == '' || isValid != true) {
+			$('.js-error').html('<p class="error">Please enter a valid zip code to search for events</p>');
 		} else {
 			$('.js-error').hide();
 			$('#js-landing-page').hide();
@@ -133,31 +132,25 @@ function handleSubmit() {
 	});
 }
 
+function showBadZipMessage() {
+	$('.js-error').html(`<p class="error">No search results. Please enter another zip code.</p>`).show();
+	$('#key-text').hide();
+}
+
 // Handle recurrent user search
 function handleNewSearch() {
 	$('#js-new-search-form').submit(event => {
 		event.preventDefault();
-		const queryTarget = $('.js-query2');
+		const queryTarget = $(event.currentTarget[0]);
 		const query = queryTarget.val();
 		queryTarget.val('');
 		const isValid = validateZipCode(query);
-		if (query == '') {
+		if (query == '' || isValid != true) {
 			$('.js-error').show();
 			$('#js-search-results-section').empty();
 			$('#js-search-results-h2').empty();
 			$('#key-text').hide();
-			$('.js-error').html('<p class="error">Please enter a zip code to search for events</p>');
-        } else if (isValid != true) {
-        	$('.js-error').show();
-			$('#js-search-results-section').empty();
-			$('#js-search-results-h2').empty();
-			$('#key-text').hide();
-            $('.js-error').html('<p class="error">Please enter a valid zip code</p>');
-   //      } else if (meetupData.length == 0) {
-			// $('#js-search-results-section').empty();
-			// $('#js-search-results-h2').empty();
-			// $('#key-text').hide();
-			// $('.js-error').html(`<p class="error">No Search Results for ${query}.</p>`);
+			$('.js-error').html('<p class="error">Please enter a valid zip code to search for events</p>');
         } else { 
 			$('.js-error').hide();
 			$('#js-search-results-section').empty();
