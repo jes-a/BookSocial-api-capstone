@@ -1,246 +1,317 @@
+/* -------------------------------------
+CSS reset
+A short set of CSS rules that resets the styling of all HTML elements to a consistent baseline so the website will look the same on all browsers
+*/
+
 * {
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    /*The box-sizing property is used to tell the browser what the sizing properties (width and height) should include border-box.*/
+    box-sizing: border-box;
+    /*reset Chrome user agent styles*/
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-before: 0px;
+    -webkit-padding-after: 0px;
+    -webkit-padding-start: 0px;
+    -webkit-padding-end: 0px;
+    /*reset Firefox user agent styles*/
+    -moz-margin-before: 0px;
+    -moz-margin-after: 0px;
+    -moz-margin-start: 0px;
+    -moz-margin-end: 0px;
+    -moz-padding-before: 0px;
+    -moz-padding-after: 0px;
+    -moz-padding-start: 0px;
+    -moz-padding-end: 0px;
+    /*reset Internet Explorer user agent styles*/
+    -ms-margin-before: 0px;
+    -ms-margin-after: 0px;
+    -ms-margin-start: 0px;
+    -ms-margin-end: 0px;
+    -ms-padding-before: 0px;
+    -ms-padding-after: 0px;
+    -ms-padding-start: 0px;
+    -ms-padding-end: 0px;
+    /*reset Opera user agent styles*/
+    -o-margin-before: 0px;
+    -o-margin-after: 0px;
+    -o-margin-start: 0px;
+    -o-margin-end: 0px;
+    -o-padding-before: 0px;
+    -o-padding-after: 0px;
+    -o-padding-start: 0px;
+    -o-padding-end: 0px;
+}
+
+body,
+html {
+    height: 100%;
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
-	margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+    margin: 0 auto;
 }
 
-h1, h2 {
-	font-family: 'Patua One', cursive;
+h1,
+h2 {
+    font-family: 'Patua One', cursive;
 }
 
 h1 {
-	font-size:  45px;
-	margin-bottom: 0;
-	color: #1b998b;
-	text-align: center;
+    font-size: 45px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #1b998b;
+    text-align: center;
 }
 
 .subhead h2 {
-	font-size: 26px;
-	padding: 10px;
+    font-size: 26px;
+    padding: 10px;
 
 }
 
 .subhead {
-	border-top:  1px solid #1b998b;
-	border-bottom:  1px solid #1b998b;
-	width: 300px;
-	margin: 15px auto 0 auto;
-	text-align: center;	
+    border-top: 1px solid #1b998b;
+    border-bottom: 1px solid #1b998b;
+    width: 300px;
+    margin: 15px auto 0 auto;
+    text-align: center;
 }
 
 h2 {
-	font-size: 32px;
-	color: #6c6c6d;
-	margin: 0;
-	text-transform: uppercase;
+    font-size: 32px;
+    color: #6c6c6d;
+    margin: 0;
+    text-transform: uppercase;
 }
 
 h3 {
-	font-size: 22px;
-	font-weight: 400;
-	color: #0d1014;
-	margin: 10px 0;
+    font-size: 22px;
+    font-weight: 400;
+    color: #0d1014;
+    margin: 10px 0;
 }
 
 h4 {
-	font-size: 18px;
-	font-weight: 400;
-	color: #6c6c6d;
-	margin: 5px 0;
+    font-size: 18px;
+    font-weight: 400;
+    color: #6c6c6d;
+    margin: 5px 0;
 }
 
 h5 {
-	font-size: 16px;
-	font-weight: 300;
-	color: #6c6c6d;
-	margin: 5px 0;
+    font-size: 16px;
+    font-weight: 300;
+    color: #6c6c6d;
+    margin: 5px 0;
 }
 
 .error {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	color: #ff0000;
-	border: none;
-	width: auto;
-	font-size: 25px;
-	text-align: left;
-	max-width: 750px;
-	margin: 0 auto;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    color: #ff0000;
+    border: none;
+    width: auto;
+    font-size: 25px;
+    text-align: left;
+    max-width: 750px;
+    margin: 0 auto;
 }
 
 a {
-	text-decoration: none;
-	color: #0d1014;
+    text-decoration: none;
+    color: #0d1014;
 }
 
 :visited {
-	color: #305a64;
+    color: #305a64;
 }
 
 :focus {
-	outline-color: #1b998b;
+    outline-color: #1b998b;
 }
 
 .meetup-h3:hover {
-	color: #ed1c40;
+    color: #ed1c40;
 }
 
 .meetup-h3:focus {
-	outline-color: #ed1c40;
+    outline-color: #ed1c40;
 }
 
 .eventbrite-h3:hover {
-	color:  #f66824;
+    color: #f66824;
 }
 
 .eventbrite-h3:focus {
-	outline-color:  #f66824;
+    outline-color: #f66824;
 }
 
 .search-section {
-	text-align: center;
-	margin-top: 30px;
-	margin-bottom: 50px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .search-box {
-	width: 191px;
-	height: 35px;
-	padding: 5px 10px;
-	border: 1px solid #1b998b;
-	font-size:  16px;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
+    width: 191px;
+    height: 35px;
+    padding: 5px 10px;
+    border: 1px solid #1b998b;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }
 
 ::placeholder {
-  font-weight: 300;
+    font-weight: 300;
 }
 
 .search-button {
-	width:  110px;
-	height:  35px;
-	margin-left: -4px;
-	font-size: 14px;
-	background: #1b998b;
-	border-color: #1b998b;
+    width: 110px;
+    height: 35px;
+    margin-left: -4px;
+    font-size: 14px;
+    background: #1b998b;
+    border-color: #1b998b;
     border-width: 2px 0 0 0;
-	color: #fff;
-	font-family: 'Roboto', sans-serif;
-	font-weight: bold;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
 }
 
 #search-results-head {
-	background-color: #C0E3DF;
-	height: 110px;
-	width: 100%;
-	margin: 0;
+    background-color: #C0E3DF;
+    height: 110px;
+    width: 100%;
+    margin: 0;
 }
 
 .results-h2 {
-	margin-top: 50px;
-	margin-bottom: 30px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.bg {
+    background-image: url('/images/books-bg.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: .9;
+    padding: 75px 0;
+}
+
+.form-bg {
+    width: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    margin: 0 auto;
+    padding: 20px 0;
+    border-radius: 5px;
 }
 
 .header2 {
-	margin-top: 0;
-	text-align: center;
-	font-size: 35px;
-	padding-top: 10px;
+    margin-top: 0;
+    text-align: center;
+    font-size: 35px;
+    padding-top: 10px;
 }
 
 .search-section-top {
-	text-align: center;
-	padding-top: 10px;
+    text-align: center;
+    padding-top: 10px;
 }
 
 #key-text {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 300;
-	font-size:  15px;
-	color: #6c6c6d;
-	margin-top: 10px;
-	margin-left: -5px;
-	margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: #6c6c6d;
+    margin-top: 10px;
+    margin-left: -5px;
+    margin-bottom: 20px;
 }
 
 #key {
-	height: 20px;
-	margin-bottom: -5px;
+    height: 20px;
+    margin-bottom: -5px;
 }
 
 #key2 {
-	height: 20px;
-	margin-bottom: -5px;
-	padding-left: 15px;	
+    height: 20px;
+    margin-bottom: -5px;
+    padding-left: 15px;
 }
 
 .search-results-section {
-	margin: 0 auto;
-	max-width: 800px;
+    margin: 0 auto;
+    max-width: 800px;
 }
 
 #search-results-header {
-	margin-left: 25px;
-	margin-right: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 .search-result {
-	border-top: 1px solid #6c6c6d;
-	padding-top: 10px;
-	margin-left: 25px;
-	margin-bottom: 35px;
-	margin-right: 25px;
+    border-top: 1px solid #6c6c6d;
+    padding-top: 10px;
+    margin-left: 25px;
+    margin-bottom: 35px;
+    margin-right: 25px;
 }
 
 .type-logo {
-	display: inline-block;
-	float: right;
-	padding-top: 5px;
-	font-size: 0;
-	height: 45px;
+    display: inline-block;
+    float: right;
+    padding-top: 5px;
+    font-size: 0;
+    height: 45px;
 }
 
 #truncated-desc {
-	display: block;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	width: 300px;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 300px;
 }
 
 
-@media screen and (min-width : 650px) {
-	#truncated-desc {
-		width: 600px;
-	}
+@media screen and (min-width: 650px) {
+    #truncated-desc {
+        width: 600px;
+    }
 
-	#search-results-head {
-	background-color: #C0E3DF;
-	height: 70px;
-	width: 100%;
-	margin: 0;
-	}
+    #search-results-head {
+        background-color: #C0E3DF;
+        height: 70px;
+        width: 100%;
+        margin: 0;
+    }
 
-	.header2 {
-	display: inline-block;
-	float: left;
-	padding-left: 30px;
-	font-size: 45px;
-	}
+    .header2 {
+        display: inline-block;
+        float: left;
+        padding-left: 30px;
+        font-size: 45px;
+    }
 
-	.search-section-top {
-	display: inline-block;
-	float: right;
-	padding-top: 17px;
-	padding-right: 30px;
-	}
+    .search-section-top {
+        display: inline-block;
+        float: right;
+        padding-top: 17px;
+        padding-right: 30px;
+    }
 
 }
-
-
-

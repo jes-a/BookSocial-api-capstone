@@ -2,59 +2,60 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>BookSocial</title>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment-with-locales.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="normalize.css">
- 	<link rel="stylesheet" type="text/css" href="main.css">
-	<link href="https://fonts.googleapis.com/css?family=Patua+One|Roboto:100,300,400" rel="stylesheet"> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BookSocial</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment-with-locales.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Patua+One|Roboto:100,300,400" rel="stylesheet">
 </head>
 
 <body>
-<!-- Landing Page -->
+    <!-- Landing Page -->
+    <main role="main" id="js-landing-page" class="bg">
+        <div class="form-bg">
+            <header role="header">
+                <h1>BookSocial</h1>
+                <h2 class="subhead">Hang Out With Fellow Bibliophiles At Events Near You</h2>
+            </header>
+            <section>
+                <form role="form" id="js-form">
+                    <div class="search-section">
+                        <input type="text" name="search" aria-label="Enter zip code" class="js-query search-box" placeholder="Enter zip code">
+                        <button type="submit" role="button" class="search-button">Find Events</button>
+                    </div>
+                    <div class="js-error"></div>
+                </form>
+            </section>
+        </div>
+    </main>
 
-<main role="main" id="js-landing-page">
-	<header role="header">
-		<h1>BookSocial</h1>
-		<h2 class="subhead">Hang Out With Fellow Bibliophiles At Events Near You</h2>
-	</header>
-	<section>
-		<form role="form" id="js-form">
-			<div class="search-section">
-				<input type="text" name="search" aria-label="Enter zip code" class="js-query search-box" placeholder="Enter zip code">
-				<button type="submit" role="button" class="search-button">Find Events</button>
-			</div>
-			<div class="js-error"></div>
-		</form>		
-	</section>
-</main>
+    <!-- Search Results -->
+    <main role="main" id="js-search-results-page" hidden>
+        <header role="header" id="search-results-head">
+            <h1 class="header2">BookSocial</h1>
+            <form role="form" id="js-new-search-form">
+                <div class="search-section-top">
+                    <input type="text" name="search" aria-label="Enter zip code" class="js-query2 search-box" placeholder="Enter zip code">
+                    <button type="submit" role="button" class="search-button">Find Events</button>
+                </div>
+            </form>
+        </header>
 
-<!-- Search Results -->	
-<main role="main" id="js-search-results-page" hidden>	
-	<header role="header" id="search-results-head">
-		<h1 class="header2">BookSocial</h1>
-			<form role="form" id="js-new-search-form">
-				<div class="search-section-top">
-					<input type="text" name="search" aria-label="Enter zip code" class="js-query2 search-box" placeholder="Enter zip code">
-					<button type="submit" role="button" class="search-button">Find Events</button>
-				</div>
-			</form>	
-	</header>
+        <section class="search-results-section js-search-results-header">
+            <div id="search-results-header" aria-label="Search results">
+                <h2 class="results-h2" id="js-search-results-h2">Search Results for </h2>
+                <p id="key-text"><img id="key" src="images/meetup-logo.png" alt="Meetup logo">= Meetup Event <img id="key2" src="images/eventbrite-orange.png" alt="Eventbrite logo">= Eventbrite Event </p>
+            </div>
+        </section>
+        <div class="js-error error-div"></div>
+        <section id="js-search-results-section" class="search-results-section"></section>
+    </main>
 
-	<section class="search-results-section js-search-results-header">
-		<div id="search-results-header" aria-label="Search results">
-			<h2 class="results-h2" id="js-search-results-h2">Search Results for </h2>
-			<p id="key-text"><img id="key" src="images/meetup-logo.png" alt="Meetup logo">= Meetup Event <img id="key2" src="images/eventbrite-orange.png" alt="Eventbrite logo">= Eventbrite Event </p>
-		</div>	
-	</section>
-	<div class="js-error error-div"></div>	
-	<section id="js-search-results-section" class="search-results-section"></section>
-</main>
-
-<!-- JavaScript -->
-<script src="main.js"></script>
+    <!-- JavaScript -->
+    <script src="main.js"></script>
 </body>
 
 </html>
