@@ -5,7 +5,7 @@ This app allows the user to search for literary events in their area by entering
 ## Screenshots ##
 
 **Login Screen**
-![Login screen](/screenshots/booksocial-landingpage.png)
+![Login screen](/screenshots/booksocial-landingpage.jpg)
 
 **Search Results Page**
 ![Search Results](/screenshots/booksocial-results.png)
