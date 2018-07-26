@@ -9,103 +9,103 @@ function getZipFromMeetup(searchTerm, callback) {
     const query = {
         'sign': true,
         'key': API_KEY,
-    	'query': `${searchTerm}`,
+        'query': `${searchTerm}`,
         }
     $.getJSON(MEETUP_ZIP_URL, query, callback);
-}    
+}
 
 function displayZipFromMeetup(data) {
-	doesZipExist = (data.data.length > 0) ? true : false;
-	if (doesZipExist) {
-		let results = data.data[0];
-		getDataFromMeetup(results.lat, results.lon, function(meetupData) {
-			handleMeetupData(meetupData);
-		});
-	} else {
-		showBadZipMessage();
-	}
+    doesZipExist = (data.data.length > 0) ? true : false;
+    if (doesZipExist) {
+        let results = data.data[0];
+        getDataFromMeetup(results.lat, results.lon, function(meetupData) {
+            handleMeetupData(meetupData);
+        });
+    } else {
+        showBadZipMessage();
+    }
 }
 
 // Get meetup event information from meetup API
 function getDataFromMeetup(lat, lon, callback) {
-	const query = {
+    const query = {
             'sign': true,
             'key': API_KEY,
-			'lat': `${lat}`,
-			'lon': `${lon}`,
-			'order': 'time',
-			'page': '20',		
-			'radius': '30.0',
-			'text': 'book',
-			'topic_category': '222'
-		}
-	$.getJSON(MEETUP_EVENTS_URL, query, callback);
-}	
+            'lat': `${lat}`,
+            'lon': `${lon}`,
+            'order': 'time',
+            'page': '20',
+            'radius': '30.0',
+            'text': 'book',
+            'topic_category': '222'
+        }
+    $.getJSON(MEETUP_EVENTS_URL, query, callback);
+}
 
 function handleMeetupData(meetupData) {
-	const meetupResults = meetupData.data.events.forEach((event, index) => {
-		let meetupResult = renderMeetupResults(event);
-		$('#js-search-results-section').append(meetupResult);
-	});
+    const meetupResults = meetupData.data.events.forEach((event, index) => {
+        let meetupResult = renderMeetupResults(event);
+        $('#js-search-results-section').append(meetupResult);
+    });
 }
 
 
 // Format dates correctly from returned JSON data and provides html formatted response
 function renderMeetupResults(meetupResult) {
-	let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
-	let date2 = `${meetupResult.time}`;
-	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
-	let date2Formatted = moment.unix(date2/1000).format('MMM DD YYYY, h:mm a');
-	if (date !== 'undefinedTundefined') {
-		return `<div class="search-result">
-				<img class="type-logo" src="images/meetup-logo.png" alt="meetup logo">
-				<h3><a class="meetup-h3" href="${meetupResult.link}" target="_blank">${meetupResult.name}</a></h3>
-				<h4>Date: ${dateFormatted} </h4>
-				<h5>Meetup Group: ${meetupResult.group.name}</h5>
-				<h5>Meetup Type: ${meetupResult.group.join_mode}</h5>
-				</div>`;
-	} else {
-		return `<div class="search-result">
-				<img class="type-logo" src="images/meetup-logo.png" alt="meetup logo">
-				<h3><a class="meetup-h3" href="${meetupResult.link}" target="_blank">${meetupResult.name}</a></h3>
-				<h4>Date: ${date2Formatted} </h4>
-				<h5>Meetup Group: ${meetupResult.group.name}</h5>
-				<h5>Meetup Type: ${meetupResult.group.join_mode}</h5>
-				</div>`;
-	}
+    let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
+    let date2 = `${meetupResult.time}`;
+    let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
+    let date2Formatted = moment.unix(date2/1000).format('MMM DD YYYY, h:mm a');
+    if (date !== 'undefinedTundefined') {
+        return `<div class="search-result">
+                <img class="type-logo" src="images/meetup-logo.png" alt="meetup logo">
+                <h3><a class="meetup-h3" href="${meetupResult.link}" target="_blank">${meetupResult.name}</a></h3>
+                <h4>Date: ${dateFormatted} </h4>
+                <h5>Meetup Group: ${meetupResult.group.name}</h5>
+                <h5>Meetup Type: ${meetupResult.group.join_mode}</h5>
+                </div>`;
+    } else {
+        return `<div class="search-result">
+                <img class="type-logo" src="images/meetup-logo.png" alt="meetup logo">
+                <h3><a class="meetup-h3" href="${meetupResult.link}" target="_blank">${meetupResult.name}</a></h3>
+                <h4>Date: ${date2Formatted} </h4>
+                <h5>Meetup Group: ${meetupResult.group.name}</h5>
+                <h5>Meetup Type: ${meetupResult.group.join_mode}</h5>
+                </div>`;
+    }
 
 }
 
 // Get event data from EventBrite API
 function getDataFromEventbrite(searchTerm, callback) {
-	if (doesZipExist == false) {
-		const query = {
-			'q': 'book',
-			'location.within': '30mi',
-			'location.address': `${searchTerm}`,
-			'token': 'DII5KMLS3IPVOZBIEG4M',
-			'sort_by': 'date'
-		}
-		$.getJSON(EVENTBRITE_SEARCH_URL, query, callback);
-	}
-}	
+    if (doesZipExist == false) {
+        const query = {
+            'q': 'book',
+            'location.within': '30mi',
+            'location.address': `${searchTerm}`,
+            'token': 'DII5KMLS3IPVOZBIEG4M',
+            'sort_by': 'date'
+        }
+        $.getJSON(EVENTBRITE_SEARCH_URL, query, callback);
+    }
+}
 
 function displayEventbriteData(eventBriteData) {
-	const results = eventBriteData.events.forEach((event, index) => {
-		let result = renderEventbriteResults(event);
-		$('#js-search-results-section').append(result);
-	});
+    const results = eventBriteData.events.forEach((event, index) => {
+        let result = renderEventbriteResults(event);
+        $('#js-search-results-section').append(result);
+    });
 }
 
 function renderEventbriteResults(result) {
-	let date = `${result.start.local}`;
-	let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
-	return `<div class="search-result">
-			<img class="type-logo" src="images/eventbrite-orange.png" alt="eventbrite logo">
-			<h3><a class="eventbrite-h3" href="${result.url}" target="_blank">${result.name.text}</a></h3>
-			<h4>Date: ${dateFormatted}</h4>
-			<h5 id="truncated-desc">${result.description.text}</h5>
-			</div>`;
+    let date = `${result.start.local}`;
+    let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
+    return `<div class="search-result">
+            <img class="type-logo" src="images/eventbrite-orange.png" alt="eventbrite logo">
+            <h3><a class="eventbrite-h3" href="${result.url}" target="_blank">${result.name.text}</a></h3>
+            <h4>Date: ${dateFormatted}</h4>
+            <h5 id="truncated-desc">${result.description.text}</h5>
+            </div>`;
 }
 
 function validateZipCode(query) {
@@ -113,53 +113,53 @@ function validateZipCode(query) {
 }
 
 function handleSubmit() {
-	$('#js-form').submit(event => {
-		event.preventDefault();
-		const queryTarget = $(event.currentTarget[0]);
-		const query = queryTarget.val();
-		queryTarget.val('');
-		const isValid = validateZipCode(query);
-		if (query == '' || isValid != true) {
-			$('.js-error').html('<p class="error">Please enter a valid zip code to search for events</p>');
-		} else {
-			$('.js-error').hide();
-			$('#js-landing-page').hide();
-			$('#js-search-results-page').show();
-			$('#js-search-results-h2').append(query);
-			getZipFromMeetup(query, displayZipFromMeetup);
-			getDataFromEventbrite(query, displayEventbriteData);
-		}		
-	});
+    $('#js-form').submit(event => {
+        event.preventDefault();
+        const queryTarget = $(event.currentTarget[0]);
+        const query = queryTarget.val();
+        queryTarget.val('');
+        const isValid = validateZipCode(query);
+        if (query == '' || isValid != true) {
+            $('.js-error').html('<p class="error">Please enter a valid zip code to search for events</p>');
+        } else {
+            $('.js-error').hide();
+            $('#js-landing-page').hide();
+            $('#js-search-results-page').show();
+            $('#js-search-results-h2').append(query);
+            getZipFromMeetup(query, displayZipFromMeetup);
+            getDataFromEventbrite(query, displayEventbriteData);
+        }
+    });
 }
 
 function showBadZipMessage() {
-	$('.js-error').html(`<p class="error">No search results. Please enter another zip code.</p>`).show();
-	$('#key-text').hide();
+    $('.js-error').html(`<p class="error">No search results. Please enter another zip code.</p>`).show();
+    $('#key-text').hide();
 }
 
 // Handle recurrent user search
 function handleNewSearch() {
-	$('#js-new-search-form').submit(event => {
-		event.preventDefault();
-		const queryTarget = $(event.currentTarget[0]);
-		const query = queryTarget.val();
-		queryTarget.val('');
-		const isValid = validateZipCode(query);
-		if (query == '' || isValid != true) {
-			$('.js-error').show();
-			$('#js-search-results-section').empty();
-			$('#js-search-results-h2').empty();
-			$('#key-text').hide();
-			$('.js-error').html('<p class="error">Please enter a valid zip code to search for events</p>');
-        } else { 
-			$('.js-error').hide();
-			$('#js-search-results-section').empty();
-			$('#js-search-results-h2').empty();
-			$('#js-search-results-h2').html(`<h2 class="results-h2">Search Results for ${query}</h2> `);
-			getZipFromMeetup(query, displayZipFromMeetup);
-			getDataFromEventbrite(query, displayEventbriteData);
+    $('#js-new-search-form').submit(event => {
+        event.preventDefault();
+        const queryTarget = $(event.currentTarget[0]);
+        const query = queryTarget.val();
+        queryTarget.val('');
+        const isValid = validateZipCode(query);
+        if (query == '' || isValid != true) {
+            $('.js-error').show();
+            $('#js-search-results-section').empty();
+            $('#js-search-results-h2').empty();
+            $('#key-text').hide();
+            $('.js-error').html('<p class="error">Please enter a valid zip code to search for events</p>');
+        } else {
+            $('.js-error').hide();
+            $('#js-search-results-section').empty();
+            $('#js-search-results-h2').empty();
+            $('#js-search-results-h2').html(`<h2 class="results-h2">Search Results for ${query}</h2> `);
+            getZipFromMeetup(query, displayZipFromMeetup);
+            getDataFromEventbrite(query, displayEventbriteData);
         }
-	});
+    });
 }
 
 $(handleSubmit)

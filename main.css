@@ -80,8 +80,10 @@ h1 {
 .subhead {
     border-top: 1px solid #1b998b;
     border-bottom: 1px solid #1b998b;
-    width: 300px;
+    width: 330px;
     margin: 15px auto 0 auto;
+    line-height: 1.25;
+    padding: 10px 0;
     text-align: center;
 }
 
@@ -200,7 +202,7 @@ a {
 }
 
 .bg {
-    background-image: url('/images/books-bg.jpg');
+    background-image: url('./images/books-bg.jpg');
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -213,12 +215,13 @@ a {
 }
 
 .form-bg {
-    width: 50%;
-    background: rgba(255, 255, 255, 0.7);
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
     margin: 0 auto;
     padding: 20px 0;
-    border-radius: 5px;
+    border-radius: 0;
 }
+
 
 .header2 {
     margin-top: 0;
@@ -312,6 +315,16 @@ a {
         float: right;
         padding-top: 17px;
         padding-right: 30px;
+    }
+
+    .form-bg {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .form-bg {
+        width: 55%;
+        border-radius: 5px;
     }
 
 }
