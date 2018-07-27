@@ -5,11 +5,26 @@ This app allows the user to search for literary events in their area by entering
 ## Screenshots ##
 
 **Login Screen**
-![Login screen](/screenshots/booksocial-landingpage.jpg)
+![Login screen](./screenshots/booksocial-landingpage.jpg)
 
 **Search Results Page**
-![Search Results](/screenshots/booksocial-results.png)
+![Search Results](./screenshots/booksocial-results.png)
 
+
+## Technical ##
+
+BookSocial was built with:
+
+* HTML5
+* CSS3
+* JavaScript
+* jQuery
+
+
+## Development Road Map
+Features for future iterations include:
+* Sort by date to integrate results
+* Add more event APIs to provide more results
 
 
 ## To Run App Locally ##
