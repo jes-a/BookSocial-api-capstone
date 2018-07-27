@@ -187,6 +187,7 @@ a {
     color: #fff;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
+    vertical-align: bottom;
 }
 
 #search-results-head {

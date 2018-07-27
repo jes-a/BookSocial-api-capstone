@@ -10,7 +10,7 @@ function getZipFromMeetup(searchTerm, callback) {
         'sign': true,
         'key': API_KEY,
         'query': `${searchTerm}`,
-        }
+    }
     $.getJSON(MEETUP_ZIP_URL, query, callback);
 }
 
@@ -18,7 +18,7 @@ function displayZipFromMeetup(data) {
     doesZipExist = (data.data.length > 0) ? true : false;
     if (doesZipExist) {
         let results = data.data[0];
-        getDataFromMeetup(results.lat, results.lon, function(meetupData) {
+        getDataFromMeetup(results.lat, results.lon, function (meetupData) {
             handleMeetupData(meetupData);
         });
     } else {
@@ -29,16 +29,16 @@ function displayZipFromMeetup(data) {
 // Get meetup event information from meetup API
 function getDataFromMeetup(lat, lon, callback) {
     const query = {
-            'sign': true,
-            'key': API_KEY,
-            'lat': `${lat}`,
-            'lon': `${lon}`,
-            'order': 'time',
-            'page': '20',
-            'radius': '30.0',
-            'text': 'book',
-            'topic_category': '222'
-        }
+        'sign': true,
+        'key': API_KEY,
+        'lat': `${lat}`,
+        'lon': `${lon}`,
+        'order': 'time',
+        'page': '20',
+        'radius': '30.0',
+        'text': 'book',
+        'topic_category': '222'
+    }
     $.getJSON(MEETUP_EVENTS_URL, query, callback);
 }
 
@@ -55,7 +55,7 @@ function renderMeetupResults(meetupResult) {
     let date = `${meetupResult.local_date}` + 'T' + `${meetupResult.local_time}`;
     let date2 = `${meetupResult.time}`;
     let dateFormatted = moment(date).format('MMM DD YYYY, h:mm a');
-    let date2Formatted = moment.unix(date2/1000).format('MMM DD YYYY, h:mm a');
+    let date2Formatted = moment.unix(date2 / 1000).format('MMM DD YYYY, h:mm a');
     if (date !== 'undefinedTundefined') {
         return `<div class="search-result">
                 <img class="type-logo" src="images/meetup-logo.png" alt="meetup logo">
