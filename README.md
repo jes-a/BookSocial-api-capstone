@@ -35,4 +35,4 @@ Features for future iterations include:
 
 * * *
 
-**Live version:** [BookSocial](https://jes-a.github.io/BookSocial/)
+**Live version:** [BookSocial](https://jes-a.github.io/BookSocial-api-capstone/)
